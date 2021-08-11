@@ -1,17 +1,36 @@
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 75%;
+  font-family: Roboto;
+  border-collapse: collapse;
+  width: 75%;
 }
 th {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 td,
 th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+  border: 1px solid none;
+  text-align: left;
+  padding: 8px;
 }
 tr:nth-child(even) {
-    background-color: #dddddd;
+  background-color: #dddddd;
+}
+h1,
+h2 {
+  font-family: Roboto;
+}
+input {
+  height: 18px;
+  width: 18px;
+  margin: auto;
+  top: 0;
+  left: 0;
+  margin-left: 10px;
+}
+label {
+  display: inline;
+  font-family: Roboto;
+  text-transform: capitalize;
+  font-size: 20px;
+  margin-left: 4px;
 }
