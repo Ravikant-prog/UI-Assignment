@@ -1,15 +1,17 @@
 let data;
 let types = {};
+let currentFilters = [];
+let currentData
 const table = document.querySelector("table");
-const headKeys = ["name", "icao", "iata", "elevation", "type"];
+const headKeys = ["name", "icao", "iata", "elevation", "latitude", "longitude", "type"];
 
 const getData = async () => {
   const res = await fetch("./data/airports.json");
   data = await res.json();
   getTypes(data);
+  data =data.splice(0,10)
   createTypesFilter();
-  createHeads(headKeys);
-  populateTable(data.splice(0, 10));
+  populateTable(data);
 };
 
 const getTypes = (data) => {
@@ -36,8 +38,22 @@ const createTypesFilter = () => {
   });
 };
 
-const onFilterChange = (by) => {
-  console.log(by);
+const applyFilter = () => {
+  if (currentFilters.length !== 0)
+    currentData = data.filter((ele) => currentFilters.includes(ele["type"]));
+  else currentData = [...data];
+  populateTable(currentData);
+};
+
+const onFilterChange = (type) => {
+  if (!types[type]) return false;
+  const found = currentFilters.indexOf(type);
+  if (found < 0) {
+    currentFilters.push(type);
+  } else {
+    currentFilters.splice(found, 1);
+  }
+  applyFilter();
 };
 
 const createHeads = (heads) => {
@@ -52,6 +68,8 @@ const createHeads = (heads) => {
 };
 
 const populateTable = (data) => {
+  table.innerHTML = "";
+  createHeads(headKeys);
   data.forEach((ele) => {
     let row = table.insertRow();
     for (let key of headKeys) {
