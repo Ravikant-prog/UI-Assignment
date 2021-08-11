@@ -1,7 +1,16 @@
+
+.title{
+  text-align: center; 
+}
+h1 span{
+  color: gray;
+}
+
 table {
   font-family: Roboto;
   border-collapse: collapse;
-  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
 }
 th {
   text-transform: uppercase;
@@ -15,20 +24,29 @@ th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
-h1,
-h2 {
-  font-family: Roboto;
+
+h2{
+  text-align: left;
+  font-family: sans-serif;
+  font-weight: bolder;
 }
+
+h1 {
+  font-family: sans-serif;
+  font-weight: bolder;
+}
+
 .filterWrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .search {
   margin-left: 400px;
 }
 .search input {
   border: none;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
   font-size: 20px;
 }
 .search input:focus {

@@ -11,23 +11,23 @@
 </head>
 
 <body>
-    <h1>Filter airports</h1>
-    <br>
+    <div class="title">
+        <h1>Filter <span>airports</span></h1>
+    </div>
     <div class="filterWrapper">
         <div class="filters">
-            <h1>Type</h1>
+            <h2>Type</h2>
         </div>
         <div class="search">
-            <h1>Search Filter</h1>
+            <h2>Filter by search</h2>
             <input type="text" id="searchbox" placeholder="Eg. Goroka" onkeyup="searchByFilter()">
         </div>
     </div>
-    <br>
-    <br>
-    <br>
+    <button onclick="navigate(-1)">Previous</button>
+    <button onclick="navigate(1)">&#62;</button>
+    <input type="number" id="rowCount" placeholder="Eg. 4" onkeyup="setRowCount()">
     <table></table>
     <script src="data/airports.json"></script>
     <script src="main.js"></script>
 </body>
-
 </html>

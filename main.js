@@ -2,6 +2,8 @@ let data;
 let types = {};
 let currentFilters = [];
 let currentData;
+let rowStart = 0;
+let rowCount = 4;
 const table = document.querySelector("table");
 const headKeys = [
   "name",
@@ -13,13 +15,24 @@ const headKeys = [
   "type",
 ];
 
+const setRowCount = (count) => {
+  count = +document.querySelector("#rowCount").value || 4;
+  if (count < 1) {
+    alert("Count needs to be atleast 1");
+    return;
+  }
+  rowCount = count;
+  rowStart = 0;
+  populateTable();
+};
+
 const getData = async () => {
   const res = await fetch("./data/airports.json");
   data = await res.json();
+  currentData = [...data]
   getTypes(data);
-  //data = data.splice(0, 10);
   createTypesFilter();
-  populateTable(data);
+  populateTable();
 };
 
 const getTypes = (data) => {
@@ -50,10 +63,11 @@ const applyFilter = () => {
   if (currentFilters.length !== 0)
     currentData = data.filter((ele) => currentFilters.includes(ele["type"]));
   else currentData = [...data];
-  populateTable(currentData);
+  populateTable();
 };
 
 const onFilterChange = (type) => {
+  rowStart = 0;
   if (!types[type]) return false;
   const found = currentFilters.indexOf(type);
   if (found < 0) {
@@ -75,10 +89,10 @@ const createHeads = (heads) => {
   });
 };
 
-const populateTable = (data) => {
+const populateTable = () => {
   table.innerHTML = "";
   createHeads(headKeys);
-  data.forEach((ele) => {
+  currentData.slice(rowStart, rowStart + rowCount).forEach((ele) => {
     let row = table.insertRow();
     for (let key of headKeys) {
       let cell = row.insertCell();
@@ -89,6 +103,7 @@ const populateTable = (data) => {
 };
 
 const searchByFilter = () => {
+  rowStart = 0;
   const query = document.querySelector("#searchbox").value;
   if (query === "") {
     currentData = [...data];
@@ -97,7 +112,19 @@ const searchByFilter = () => {
       ele["name"].toLowerCase().includes(query.toLowerCase())
     );
   }
-  populateTable(currentData);
+  populateTable();
+};
+
+const navigate = (towards) => {
+  if (towards > 0) {
+    newRowStart = rowStart + rowCount;
+  } else {
+    newRowStart = rowStart - rowCount;
+  }
+  if (newRowStart > -1 && newRowStart < currentData.length) {
+    rowStart = newRowStart;
+    populateTable();
+  }
 };
 
 getData();
