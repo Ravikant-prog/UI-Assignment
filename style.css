@@ -19,7 +19,23 @@ h1,
 h2 {
   font-family: Roboto;
 }
-input {
+.filterWrapper {
+  display: flex;
+  align-items: center;
+}
+.search {
+  margin-left: 400px;
+}
+.search input {
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+}
+.search input:focus {
+  outline: none;
+}
+
+.filters input {
   height: 18px;
   width: 18px;
   margin: auto;
@@ -27,7 +43,7 @@ input {
   left: 0;
   margin-left: 10px;
 }
-label {
+.filters label {
   display: inline;
   font-family: Roboto;
   text-transform: capitalize;

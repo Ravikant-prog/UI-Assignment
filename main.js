@@ -1,15 +1,23 @@
 let data;
 let types = {};
 let currentFilters = [];
-let currentData
+let currentData;
 const table = document.querySelector("table");
-const headKeys = ["name", "icao", "iata", "elevation", "latitude", "longitude", "type"];
+const headKeys = [
+  "name",
+  "icao",
+  "iata",
+  "elevation",
+  "latitude",
+  "longitude",
+  "type",
+];
 
 const getData = async () => {
   const res = await fetch("./data/airports.json");
   data = await res.json();
   getTypes(data);
-  data =data.splice(0,10)
+  //data = data.splice(0, 10);
   createTypesFilter();
   populateTable(data);
 };
@@ -78,6 +86,18 @@ const populateTable = (data) => {
       cell.appendChild(text);
     }
   });
+};
+
+const searchByFilter = () => {
+  const query = document.querySelector("#searchbox").value;
+  if (query === "") {
+    currentData = [...data];
+  } else {
+    currentData = data.filter((ele) =>
+      ele["name"].toLowerCase().includes(query.toLowerCase())
+    );
+  }
+  populateTable(currentData);
 };
 
 getData();
