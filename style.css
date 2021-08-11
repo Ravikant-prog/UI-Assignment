@@ -4,7 +4,7 @@ table {
     width: 75%;
 }
 th {
-    text-transform: capitalize;
+    text-transform: uppercase;
 }
 td,
 th {
