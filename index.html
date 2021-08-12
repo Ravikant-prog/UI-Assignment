@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="style.css">
     <title>Airport</title>
 </head>
@@ -13,6 +14,7 @@
 <body>
     <div class="title">
         <h1>Filter <span>airports</span></h1>
+<!--         <span class="material-icons-sharp">grid_view</span> -->
     </div>
     <div class="filterWrapper">
         <div class="filters">
@@ -23,11 +25,14 @@
             <input type="text" id="searchbox" placeholder="Eg. Goroka" onkeyup="searchByFilter()">
         </div>
     </div>
-    <button onclick="navigate(-1)">Previous</button>
-    <button onclick="navigate(1)">&#62;</button>
-    <input type="number" id="rowCount" placeholder="Eg. 4" onkeyup="setRowCount()">
     <table></table>
+    <div class="page">
+        <button onclick="navigate(-1)"><span class="material-icons">arrow_back</span></button>
+        <input type="number" id="rowCount" placeholder="Eg. 4" onkeyup="setRowCount()">
+        <button onclick="navigate(1)"><span class="material-icons">arrow_forward</span></button>
+    </div>
     <script src="data/airports.json"></script>
     <script src="main.js"></script>
 </body>
+
 </html>
