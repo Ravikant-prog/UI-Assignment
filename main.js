@@ -135,9 +135,9 @@ const navigate = (towards) => {
 const formPageInfo = () => {
   let rowEnd = rowStart+rowCount;
   if(rowStart+rowCount>currentData.length) rowEnd = currentData.length;
-  return `Showing ${rowStart + 1} - ${rowEnd} of ${
+  return `Showing <b>${rowStart + 1} - ${rowEnd}</b> of <b>${
     currentData.length
-  } rows`;
+  }</b> rows`;
 };
 
 getData();

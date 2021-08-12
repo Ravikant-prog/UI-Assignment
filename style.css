@@ -88,6 +88,9 @@ h1 {
 .rowcount input :focus {
   outline: none;
 }
+p{
+  font-family: sans-serif;
+}
 
 @media only screen and (max-width: 950px) {
   body{
