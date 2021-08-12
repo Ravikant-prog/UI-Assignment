@@ -28,8 +28,11 @@
     <table></table>
     <div class="page">
         <button onclick="navigate(-1)"><span class="material-icons">arrow_back</span></button>
-        <input type="number" id="rowCount" placeholder="Eg. 4" onkeyup="setRowCount()">
+        <p id="paging"></p>
         <button onclick="navigate(1)"><span class="material-icons">arrow_forward</span></button>
+    </div>
+    <div class="rowcount">
+        <input type="number" id="rowCount" placeholder="Row Count" onkeyup="setRowCount()">
     </div>
     <script src="data/airports.json"></script>
     <script src="main.js"></script>

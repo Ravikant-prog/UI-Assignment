@@ -1,10 +1,11 @@
 let data;
 let types = {};
-let currentFilters = [];
+let currentFilters = JSON.parse(localStorage.getItem("filters")) || [];
 let currentData;
 let rowStart = 0;
-let rowCount = 4;
+let rowCount = +localStorage.getItem("rowCount") || 4;
 const table = document.querySelector("table");
+const para = document.querySelector("#paging");
 const headKeys = [
   "name",
   "icao",
@@ -21,6 +22,7 @@ const setRowCount = (count) => {
     alert("Count needs to be atleast 1");
     return;
   }
+  localStorage.setItem("rowCount", rowCount);
   rowCount = count;
   rowStart = 0;
   populateTable();
@@ -29,9 +31,10 @@ const setRowCount = (count) => {
 const getData = async () => {
   const res = await fetch("./data/airports.json");
   data = await res.json();
-  currentData = [...data]
+  currentData = [...data];
   getTypes(data);
   createTypesFilter();
+  applyFilter();
   populateTable();
 };
 
@@ -48,7 +51,7 @@ const createTypesFilter = () => {
 
     checkbox.type = "checkbox";
     checkbox.name = type;
-    checkbox.value = false;
+    checkbox.checked = currentFilters.includes(type);
     checkbox.id = type;
     checkbox.onchange = () => onFilterChange(type);
     const label = document.createElement("label");
@@ -75,6 +78,7 @@ const onFilterChange = (type) => {
   } else {
     currentFilters.splice(found, 1);
   }
+  localStorage.setItem("filters", JSON.stringify(currentFilters));
   applyFilter();
 };
 
@@ -100,6 +104,7 @@ const populateTable = () => {
       cell.appendChild(text);
     }
   });
+  para.innerHTML = formPageInfo();
 };
 
 const searchByFilter = () => {
@@ -125,6 +130,12 @@ const navigate = (towards) => {
     rowStart = newRowStart;
     populateTable();
   }
+};
+
+const formPageInfo = () => {
+  return `Showing ${rowStart + 1} - ${rowStart + rowCount} of ${
+    currentData.length
+  } rows`;
 };
 
 getData();

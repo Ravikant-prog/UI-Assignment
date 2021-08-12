@@ -1,9 +1,8 @@
-
-.title{
+.title {
   text-align: center;
 }
-h1 span{
-  color:lightgray;
+h1 span {
+  color: lightgray;
 }
 
 table {
@@ -26,7 +25,7 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 
-h2{
+h2 {
   text-align: left;
   font-family: sans-serif;
   font-weight: bolder;
@@ -67,18 +66,31 @@ h1 {
   font-size: 20px;
   margin-left: 4px;
 }
-.page{
+.page {
   text-align: center;
   margin-top: 30px;
   display: flex;
 }
-.page button{
+.page button {
   border: none;
   font-size: xx-large;
   margin: auto;
 }
+.rowcount {
+  text-align: center;
+}
+
+.rowcount input {
+  border: none;
+  border-bottom: 2px solid black;
+}
+
+.rowcount input :focus {
+  outline: none;
+}
+
 @media only screen and (max-width: 600px) {
-  body{
-    position:absolute;
+  body {
+    position: absolute;
   }
 }
