@@ -89,8 +89,34 @@ h1 {
   outline: none;
 }
 
+@media only screen and (max-width: 950px) {
+  body{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .search{
+    margin-left: 200px;
+  }
+  .filterWrapper{
+    display: flex;
+    zoom: 0.8;
+  }
+}
+
 @media only screen and (max-width: 600px) {
-  body {
-    position: absolute;
+  body{
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  table{
+    zoom: 0.7;
+  }
+  .search{
+    margin-left: 0px;
+    margin-top: 50px;
+  }
+  .filterWrapper{
+    display: block;
+    zoom: 0.7;
   }
 }

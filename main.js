@@ -22,10 +22,10 @@ const setRowCount = (count) => {
     alert("Count needs to be atleast 1");
     return;
   }
-  localStorage.setItem("rowCount", rowCount);
   rowCount = count;
   rowStart = 0;
   populateTable();
+  localStorage.setItem("rowCount", rowCount);
 };
 
 const getData = async () => {
@@ -133,7 +133,9 @@ const navigate = (towards) => {
 };
 
 const formPageInfo = () => {
-  return `Showing ${rowStart + 1} - ${rowStart + rowCount} of ${
+  let rowEnd = rowStart+rowCount;
+  if(rowStart+rowCount>currentData.length) rowEnd = currentData.length;
+  return `Showing ${rowStart + 1} - ${rowEnd} of ${
     currentData.length
   } rows`;
 };
