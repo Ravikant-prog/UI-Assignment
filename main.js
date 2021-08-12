@@ -1,5 +1,5 @@
 let data;
-let types = {};
+let types = {}; // to store unique types from the data
 let currentFilters = JSON.parse(localStorage.getItem("filters")) || [];
 let currentData;
 let rowStart = 0;
@@ -14,10 +14,10 @@ const headKeys = [
   "latitude",
   "longitude",
   "type",
-];
+];                                                        // keys from data to display as table column
 
 const setRowCount = (count) => {
-  count = +document.querySelector("#rowCount").value || 4;
+  count = +document.querySelector("#rowCount").value || 4; //set rowCount to 4 if nothing provided
   if (count < 1) {
     alert("Count needs to be atleast 1");
     return;
@@ -25,17 +25,17 @@ const setRowCount = (count) => {
   rowCount = count;
   rowStart = 0;
   populateTable();
-  localStorage.setItem("rowCount", rowCount);
+  localStorage.setItem("rowCount", rowCount); 
 };
 
 const getData = async () => {
-  const res = await fetch("./data/airports.json");
+  const res = await fetch("./data/airports.json");         // fetching data from JSON file
   data = await res.json();
   currentData = [...data];
-  getTypes(data);
-  createTypesFilter();
-  applyFilter();
-  populateTable();
+  getTypes(data);                                          // collect types from data
+  createTypesFilter();                                     // create checkbox for types
+  applyFilter();                                           // apply initial filter   
+  populateTable();                                         // create table with current data
 };
 
 const getTypes = (data) => {
@@ -82,7 +82,7 @@ const onFilterChange = (type) => {
   applyFilter();
 };
 
-const createHeads = (heads) => {
+const createHeads = (heads) => {                       // set column names
   const thead = table.createTHead();
   const row = thead.insertRow();
   heads.forEach((head) => {
@@ -94,7 +94,7 @@ const createHeads = (heads) => {
 };
 
 const populateTable = () => {
-  table.innerHTML = "";
+  table.innerHTML = "";                                // reset table before re-populating
   createHeads(headKeys);
   currentData.slice(rowStart, rowStart + rowCount).forEach((ele) => {
     let row = table.insertRow();
@@ -121,9 +121,9 @@ const searchByFilter = () => {
 };
 
 const navigate = (towards) => {
-  if (towards > 0) {
+  if (towards > 0) {                                   // when user presses next 
     newRowStart = rowStart + rowCount;
-  } else {
+  } else {                                             // when user presses previous
     newRowStart = rowStart - rowCount;
   }
   if (newRowStart > -1 && newRowStart < currentData.length) {
